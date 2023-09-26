@@ -52,6 +52,12 @@ export const Header = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink href="/nffriends">
+          <SparklesIcon className="h-4 w-4" />
+          NoFungibleFriend Collections
+        </NavLink>
+      </li>
+      <li>
         <NavLink href="/blockexplorer">
           <MagnifyingGlassIcon className="h-4 w-4" />
           Block Explorer
