@@ -141,7 +141,7 @@ contract NonFungibleFriends is Ownable {
             protocolFee,
             subjectFee,
             supply + amount,
-            tSupply
+            tSupply + amount
         );
         (bool success1, ) = protocolFeeDestination.call{value: protocolFee}("");
         (bool success2, ) = collectionId.call{value: subjectFee}("");
@@ -166,7 +166,6 @@ contract NonFungibleFriends is Ownable {
                 "Msg.sender not tokenId owner"
             );
             owners[collectionId][tokenIds[i]] = address(0);
-            totalSupply[collectionId]--;
         }
 
         balances[collectionId][msg.sender] -= amount;
@@ -181,7 +180,7 @@ contract NonFungibleFriends is Ownable {
             protocolFee,
             subjectFee,
             supply - amount,
-            tSupply
+            tSupply - amount
         );
         (bool success1, ) = msg.sender.call{
             value: price - protocolFee - subjectFee

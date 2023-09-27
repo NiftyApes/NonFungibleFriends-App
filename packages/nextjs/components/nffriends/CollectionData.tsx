@@ -1,26 +1,29 @@
-import { useAccount } from "wagmi";
 import { useScaffoldContractRead, useScaffoldEventHistory, useScaffoldEventSubscriber } from "~~/hooks/scaffold-eth";
 
-export const ContractData = () => {
-  const { address } = useAccount();
+interface IProps {
+  targetAddress?: string;
+}
 
+export const CollectionData = ({ targetAddress }: IProps) => {
   const { data: mintSupply } = useScaffoldContractRead({
     contractName: "NonFungibleFriends",
     functionName: "mintedSupply",
-    args: [address],
+    args: [targetAddress],
   });
 
   const { data: totalSupply } = useScaffoldContractRead({
     contractName: "NonFungibleFriends",
     functionName: "totalSupply",
-    args: [address],
+    args: [targetAddress],
   });
 
   const { data: mintPrice } = useScaffoldContractRead({
     contractName: "NonFungibleFriends",
     functionName: "getMintPriceAfterFee",
-    args: [address, BigInt(1)],
+    args: [targetAddress, BigInt(1)],
   });
+
+  console.log("totalSupply", totalSupply);
 
   useScaffoldEventSubscriber({
     contractName: "NonFungibleFriends",
